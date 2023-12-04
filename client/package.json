@@ -1,0 +1,20 @@
+{
+  "name": "chatbot-client",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "redux": "^4.0.0",
+    "react-redux": "^8.0.0",
+    "redux-thunk": "^2.0.0",
+    "axios": "^1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+}
