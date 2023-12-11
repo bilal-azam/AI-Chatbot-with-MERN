@@ -11,6 +11,12 @@
     "redux-thunk": "^2.0.0",
     "axios": "^1.0.0"
   },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "babel-jest": "^29.0.0",
+    "react-test-renderer": "^18.0.0",
+    "redux-mock-store": "^1.5.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
