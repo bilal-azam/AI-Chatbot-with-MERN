@@ -1,0 +1,41 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: |
+          cd client
+          npm install
+          cd ../server
+          npm install
+
+      - name: Build React app
+        run: |
+          cd client
+          npm run build
+
+      - name: Deploy to AWS
+        env:
+          AWS_ACCESS_KEY_ID: { secrets.AWS_ACCESS_KEY_ID }
+          AWS_SECRET_ACCESS_KEY: { secrets.AWS_SECRET_ACCESS_KEY }
+          AWS_REGION: { secrets.AWS_REGION }
+        run: |
+          aws s3 sync client/build s3://your-bucket-name --delete
+          aws deploy push --application-name your-app-name --s3-location s3://your-bucket-name --source .
+          aws deploy create-deployment --application-name your-app-name --deployment-group-name your-deployment-group --s3-location bucket=your-bucket-name,key=your-app-name.zip
