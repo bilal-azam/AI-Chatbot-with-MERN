@@ -1,7 +1,7 @@
 // server/index.js
-const errorHandler = require('./middleware/errorHandler');
+const rateLimiter = require('./middleware/rateLimiter');
 
 // Existing code...
 
-// Use logging middleware
-app.use(errorHandler);
+// Apply rate limiting middleware
+app.use(rateLimiter);
