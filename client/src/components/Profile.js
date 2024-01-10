@@ -1,26 +1,22 @@
-// client/src/components/Profile.js
+// client/src/components/Profile.js (updated with Redux)
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserProfile, updateUserProfile } from '../actions/userActions';
 
 const Profile = () => {
-    const [user, setUser] = useState({});
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.user);
+
+    const [name, setName] = useState(user.name || '');
+    const [email, setEmail] = useState(user.email || '');
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const res = await axios.get('/api/user/profile');
-            setUser(res.data);
-            setName(res.data.name);
-            setEmail(res.data.email);
-        };
+        dispatch(getUserProfile());
+    }, [dispatch]);
 
-        fetchUser();
-    }, []);
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        await axios.put('/api/user/profile', { name, email });
+        dispatch(updateUserProfile({ name, email }));
     };
 
     return (
