@@ -1,7 +1,7 @@
 // server/index.js
-const rateLimiter = require('./middleware/rateLimiter');
+const securityHeaders = require('./middleware/securityHeaders');
 
 // Existing code...
 
-// Apply rate limiting middleware
-app.use(rateLimiter);
+// Use security headers middleware
+app.use(securityHeaders);
