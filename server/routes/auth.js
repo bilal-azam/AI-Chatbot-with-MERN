@@ -1,24 +1,11 @@
-// server/routes/auth.js
-// Reset password
-router.post('/reset/:token', async (req, res) => {
-    const { token } = req.params;
-    const { newPassword } = req.body;
-    try {
-        let user = await User.findOne({
-            resetPasswordToken: token,
-            resetPasswordExpires: { $gt: Date.now() }
-        });
-        if (!user) return res.status(400).json({ msg: 'Password reset token is invalid or has expired' });
+// server/routes/auth.js (update)
+const authLogger = require('../middleware/authLogger');
 
-        // Set new password
-        user.password = await bcrypt.hash(newPassword, 10);
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpires = undefined;
-        await user.save();
+// Apply logging middleware to login and registration routes
+router.post('/login', authLogger, async (req, res) => {
+    // Existing login logic
+});
 
-        res.status(200).json({ msg: 'Password has been reset successfully' });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
+router.post('/register', authLogger, async (req, res) => {
+    // Existing registration logic
 });
