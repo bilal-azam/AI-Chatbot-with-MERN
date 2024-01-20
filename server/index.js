@@ -1,7 +1,7 @@
 // server/index.js
-const securityHeaders = require('./middleware/securityHeaders');
+const notFound = require('./middleware/notFound');
 
 // Existing code...
 
-// Use security headers middleware
-app.use(securityHeaders);
+// Use 404 error handler after all routes
+app.use(notFound);
