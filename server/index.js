@@ -1,7 +1,8 @@
 // server/index.js
-const notFound = require('./middleware/notFound');
+const { logToCloudWatch } = require('./middleware/cloudwatch');
 
-// Existing code...
-
-// Use 404 error handler after all routes
-app.use(notFound);
+// Example usage for logging requests
+app.use((req, res, next) => {
+    logToCloudWatch('api-logs', 'request-log', `Request: ${req.method} ${req.originalUrl}`);
+    next();
+});
