@@ -1,8 +1,7 @@
 // server/index.js
-const { logToCloudWatch } = require('./middleware/cloudwatch');
+const healthRoute = require('./routes/health');
 
-// Example usage for logging requests
-app.use((req, res, next) => {
-    logToCloudWatch('api-logs', 'request-log', `Request: ${req.method} ${req.originalUrl}`);
-    next();
-});
+// Existing code...
+
+// Add health check route
+app.use('/api', healthRoute);
