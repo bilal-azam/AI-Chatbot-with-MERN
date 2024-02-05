@@ -1,0 +1,22 @@
+{
+    "family": "my-app",
+    "containerDefinitions": [
+        {
+            "name": "my-app",
+            "image": "{ secrets.AWS_ECR_REGISTRY }/my-app:latest",
+            "memory": 512,
+            "cpu": 256,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 5000
+                }
+            ]
+        }
+    ],
+    "networkMode": "bridge",
+    "requiresCompatibilities": [
+        "EC2"
+    ]
+}
