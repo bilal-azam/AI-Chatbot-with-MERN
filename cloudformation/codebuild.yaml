@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyBuildProject:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: my-app-build-project
+      Source:
+        Type: CODECOMMIT
+        Location: !Sub 'https://git-codecommit.AWS::Region.amazonaws.com/v1/repos/my-app-repo'
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/nodejs:14
+        Type: LINUX_CONTAINER
+      ServiceRole: !GetAtt MyBuildProjectRole.Arn
+      TimeoutInMinutes: 30
