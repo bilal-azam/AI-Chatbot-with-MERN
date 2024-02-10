@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyDashboard:
+    Type: 'AWS::CloudWatch::Dashboard'
+    Properties:
+      DashboardName: my-app-dashboard
+      DashboardBody: !Sub '{
+          "widgets": [
+            {
+              "type": "metric",
+              "x": 0,
+              "y": 0,
+              "width": 12,
+              "height": 6,
+              "properties": {
+                "metrics": [
+                  [ "AWS/ECS", "CPUUtilization", "ClusterName", "{MyECSCluster}", "ServiceName", "my-app-service" ]
+                ],
+                "period": 300,
+                "stat": "Average",
+                "region": "AWS::Region",
+                "title": "ECS CPU Utilization"
+              }
+            }
+          ]
+        }'
