@@ -1,7 +1,7 @@
 // server/index.js
-const healthRoute = require('./routes/health');
+const metricsRoute = require('./routes/metrics');
 
 // Existing code...
 
-// Add health check route
-app.use('/api', healthRoute);
+// Add metrics route
+app.use('/api', metricsRoute);
