@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  ProductionLoadBalancer:
+    Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+    Properties:
+      Name: my-app-lb
+      Subnets:
+        - subnet-xxxxxxxx
+        - subnet-yyyyyyyy
+      SecurityGroups:
+        - sg-xxxxxxxx
+      Scheme: internet-facing
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: '60'
+
+  ProductionListener:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Properties:
+      DefaultActions:
+        - Type: fixed-response
+          FixedResponseConfig:
+            StatusCode: '200'
+            ContentType: text/plain
+            MessageBody: 'OK'
+      LoadBalancerArn: !Ref ProductionLoadBalancer
+      Port: 80
+      Protocol: HTTP
+
+  ProductionTargetGroup:
+    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Properties:
+      Port: 5000
+      Protocol: HTTP
+      VpcId: vpc-xxxxxxxx
+      HealthCheckPath: /api/health
+      HealthCheckIntervalSeconds: 30
+      HealthCheckTimeoutSeconds: 5
