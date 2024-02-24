@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyProductionService:
+    Type: 'AWS::ECS::Service'
+    Properties:
+      Cluster: !Ref MyECSCluster
+      TaskDefinition: !Ref MyECSTaskDefinition
+      DesiredCount: 2
+      LoadBalancers:
+        - ContainerName: my-app
+          ContainerPort: 5000
+          TargetGroupArn: !Ref ProductionTargetGroup
+      LaunchType: EC2
