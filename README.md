@@ -1,54 +1,21 @@
-# MyApp Documentation
+## GitHub Actions Workflows
 
-## Setup
+### CI Workflow
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/your-repo/my-app.git
-   ```
+- **File**: `.github/workflows/ci.yml`
+- **Purpose**: Runs linting and tests on code changes to the main branch.
 
-2. Install dependencies:
-   ```
-   npm install
-   ```
+### Deployment Workflow
 
-3. Set up environment variables in `.env` file.
+- **File**: `.github/workflows/deploy.yml`
+- **Purpose**: Builds and pushes Docker image to AWS ECR and deploys to ECS.
 
-## Development
+### Cypress Tests Workflow
 
-1. Start the development server:
-   ```
-   npm start
-   ```
+- **File**: `.github/workflows/cypress.yml`
+- **Purpose**: Runs end-to-end tests using Cypress on code changes to the main branch.
 
-2. Run linting and tests:
-   ```
-   npm run lint
-   npm test
-   ```
+### Infrastructure Changes Workflow
 
-## Docker
-
-1. Build Docker image:
-   ```
-   docker build -t my-app .
-   ```
-
-2. Run Docker container:
-   ```
-   docker run -p 5000:5000 my-app
-   ```
-
-## Deployment
-
-1. Deploy using CloudFormation:
-   ```
-   aws cloudformation deploy --template-file cloudformation/infrastructure.yaml --stack-name my-app-infrastructure --capabilities CAPABILITY_NAMED_IAM
-   ```
-
-2. Monitor the application through CloudWatch dashboards.
-
-3. Check the application status:
-   ```
-   curl http://<load-balancer-url>/api/health
-   ```
+- **File**: `.github/workflows/infrastructure.yml`
+- **Purpose**: Deploys CloudFormation stack changes related to infrastructure.
