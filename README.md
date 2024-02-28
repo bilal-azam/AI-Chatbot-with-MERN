@@ -1,21 +1,59 @@
-## GitHub Actions Workflows
+# MyApp Project Setup
 
-### CI Workflow
+## Introduction
 
-- **File**: `.github/workflows/ci.yml`
-- **Purpose**: Runs linting and tests on code changes to the main branch.
+This project is a full-stack application using MERN technology with state management using Redux. It includes Docker support, deployment to AWS ECS, and various automated workflows.
 
-### Deployment Workflow
+## Getting Started
 
-- **File**: `.github/workflows/deploy.yml`
-- **Purpose**: Builds and pushes Docker image to AWS ECR and deploys to ECS.
+1. **Clone the repository**:
+   ```
+   git clone https://github.com/your-repo/my-app.git
+   ```
 
-### Cypress Tests Workflow
+2. **Install dependencies**:
+   ```
+   npm install
+   ```
 
-- **File**: `.github/workflows/cypress.yml`
-- **Purpose**: Runs end-to-end tests using Cypress on code changes to the main branch.
+3. **Start the development server**:
+   ```
+   npm start
+   ```
 
-### Infrastructure Changes Workflow
+4. **Run linting, tests, and checks**:
+   ```
+   npm run check
+   npm run check:security
+   ```
 
-- **File**: `.github/workflows/infrastructure.yml`
-- **Purpose**: Deploys CloudFormation stack changes related to infrastructure.
+## Docker
+
+1. **Build Docker image**:
+   ```
+   docker build -t my-app .
+   ```
+
+2. **Run Docker container**:
+   ```
+   docker run -p 5000:5000 my-app
+   ```
+
+## Deployment
+
+1. **Deploy using CloudFormation**:
+   ```
+   aws cloudformation deploy --template-file cloudformation/infrastructure.yaml --stack-name my-app-infrastructure --capabilities CAPABILITY_NAMED_IAM
+   ```
+
+2. **Update ECS Service**:
+   ```
+   aws ecs update-service --cluster my-app-cluster --service my-app-service --force-new-deployment
+   ```
+
+## CI/CD
+
+- **CI Workflow**: Runs linting and tests on code changes.
+- **Deployment Workflow**: Builds and pushes Docker image to AWS ECR and deploys to ECS.
+- **Cypress Tests Workflow**: Runs end-to-end tests.
+- **Infrastructure Changes Workflow**: Deploys infrastructure changes using CloudFormation.
