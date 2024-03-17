@@ -1,0 +1,33 @@
+name: Elastic Beanstalk Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Docker image
+        run: docker build -t my-app .
+
+      - name: Deploy to Elastic Beanstalk
+        env:
+          AWS_ACCESS_KEY_ID: { secrets.AWS_ACCESS_KEY_ID }
+          AWS_SECRET_ACCESS_KEY: { secrets.AWS_SECRET_ACCESS_KEY }
+          AWS_REGION: us-east-1
+        run: |
+          ./scripts/deploy-eb.sh
