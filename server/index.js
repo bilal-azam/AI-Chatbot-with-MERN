@@ -1,7 +1,13 @@
 // server/index.js
-const metricsRoute = require('./routes/metrics');
+const express = require('express');
+const app = express();
+const rateLimit = require('./middleware/rateLimitMiddleware');
+const itemRoutes = require('./routes/itemRoutes');
+const errorMiddleware = require('./middleware/errorMiddleware');
 
-// Existing code...
+app.use(express.json());
+app.use(rateLimit);
+app.use('/api', itemRoutes);
+app.use(errorMiddleware);
 
-// Add metrics route
-app.use('/api', metricsRoute);
+app.listen(5000, () => console.log('Server running on port 5000'));
