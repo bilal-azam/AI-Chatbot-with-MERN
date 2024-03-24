@@ -1,13 +1,15 @@
-## Elastic Beanstalk Deployment
+## Error Handling
 
-1. **Package application**:
-   - Ensure your application is packaged and uploaded to S3.
+### Backend
 
-2. **Deploy to Elastic Beanstalk**:
-   - Run the deployment script:
-     ```
-     ./scripts/deploy-eb.sh
-     ```
+- Uses custom error middleware to handle server errors.
+- Errors are logged and a generic message is sent to the client.
 
-3. **Monitor the environment**:
-   - Use the Elastic Beanstalk console to monitor the health of your application.
+### Frontend
+
+- Uses an error boundary to catch JavaScript errors in the component tree.
+
+## Rate Limiting
+
+- **Backend**: Rate limiting is implemented to prevent abuse.
+- **Configuration**: Requests are limited to 100 per 15 minutes.
