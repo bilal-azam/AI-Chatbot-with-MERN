@@ -1,32 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
-  MyECRRepository:
-    Type: 'AWS::ECR::Repository'
+  MyAppBucket:
+    Type: 'AWS::S3::Bucket'
     Properties:
-      RepositoryName: my-app-repo
+      BucketName: my-app-bucket
 
-  MyECSCluster:
-    Type: 'AWS::ECS::Cluster'
+  MyAppBucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
     Properties:
-      ClusterName: my-app-cluster
-
-  MyECSTaskDefinition:
-    Type: 'AWS::ECS::TaskDefinition'
-    Properties:
-      Family: my-app-task
-      ContainerDefinitions:
-        - Name: my-app
-          Image: !Sub 'AWS::AccountId.dkr.ecr.AWS::Region.amazonaws.com/my-app:latest'
-          Memory: 512
-          Cpu: 256
-          Essential: true
-          PortMappings:
-            - ContainerPort: 5000
-              HostPort: 5000
-
-  MyECSService:
-    Type: 'AWS::ECS::Service'
-    Properties:
-      Cluster: !Ref MyECSCluster
-      TaskDefinition: !Ref MyECSTaskDefinition
-      DesiredCount: 1
+      Bucket: !Ref MyAppBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: elasticbeanstalk.amazonaws.com
+            Action: s3:GetObject
+            Resource: arn:aws:s3:::my-app-bucket/*
