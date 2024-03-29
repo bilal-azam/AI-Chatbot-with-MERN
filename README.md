@@ -1,15 +1,13 @@
-## Error Handling
+## Cleanup and Maintenance
 
-### Backend
+### Docker
 
-- Uses custom error middleware to handle server errors.
-- Errors are logged and a generic message is sent to the client.
+1. **Remove old Docker images**:
+   ```
+   ./scripts/cleanup.sh
+   ```
 
-### Frontend
+### ECS
 
-- Uses an error boundary to catch JavaScript errors in the component tree.
-
-## Rate Limiting
-
-- **Backend**: Rate limiting is implemented to prevent abuse.
-- **Configuration**: Requests are limited to 100 per 15 minutes.
+1. **Remove old ECS tasks**:
+   - Use AWS CLI commands or console to clean up old tasks.
