@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { fetchItems } from '../api';
 
 const ItemList = () => {
     const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        const getItems = async () => {
-            const items = await fetchItems();
-            setItems(items);
-        };
-        getItems();
+    const getItems = useCallback(async () => {
+        const items = await fetchItems();
+        setItems(items);
     }, []);
+
+    useEffect(() => {
+        getItems();
+    }, [getItems]);
 
     return (
         <ul>
