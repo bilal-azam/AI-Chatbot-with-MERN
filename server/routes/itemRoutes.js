@@ -2,8 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const itemService = require('../services/itemService');
+const authMiddleware = require('../middleware/authMiddleware');
 
-router.get('/items', async (req, res, next) => {
+router.get('/items', authMiddleware, async (req, res, next) => {
     try {
         const items = await itemService.getAllItems();
         res.json(items);
@@ -12,7 +13,7 @@ router.get('/items', async (req, res, next) => {
     }
 });
 
-router.post('/items', async (req, res, next) => {
+router.post('/items', authMiddleware, async (req, res, next) => {
     try {
         const item = await itemService.createItem(req.body);
         res.status(201).json(item);
