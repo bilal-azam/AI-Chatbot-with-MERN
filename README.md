@@ -1,11 +1,24 @@
-# Project Finalization
+## Authentication
 
-1. **Ensure all features are implemented and tested**:
-   - Review and update code and tests.
-   
-2. **Verify deployment process**:
-   - Test all deployment scripts and workflows.
+### Backend
 
-3. **Update documentation**:
-   - Ensure all sections are accurate and complete.
-   - Include setup, deployment, testing, and usage instructions.
+- JWT-based authentication is used.
+- Ensure `JWT_SECRET` is set in your environment variables.
+
+### Frontend
+
+- Users can log in and out using the provided components.
+- Tokens are stored in `localStorage`.
+
+## Login
+
+1. **Navigate to login page**:
+   - URL: `/login`
+
+2. **Submit credentials**:
+   - Provides an authentication token.
+
+## Logout
+
+1. **Click logout button**:
+   - Clears token from `localStorage` and redirects to login page.
