@@ -1,25 +1,10 @@
 // server/routes/itemRoutes.js
-const express = require('express');
-const router = express.Router();
-const itemService = require('../services/itemService');
-const authMiddleware = require('../middleware/authMiddleware');
+const roleMiddleware = require('../middleware/roleMiddleware');
 
-router.get('/items', authMiddleware, async (req, res, next) => {
-    try {
-        const items = await itemService.getAllItems();
-        res.json(items);
-    } catch (error) {
-        next(error);
-    }
+router.get('/items', authMiddleware, roleMiddleware(['admin', 'user']), async (req, res, next) => {
+    // Route code
 });
 
-router.post('/items', authMiddleware, async (req, res, next) => {
-    try {
-        const item = await itemService.createItem(req.body);
-        res.status(201).json(item);
-    } catch (error) {
-        next(error);
-    }
+router.post('/items', authMiddleware, roleMiddleware(['admin']), async (req, res, next) => {
+    // Route code
 });
-
-module.exports = router;
