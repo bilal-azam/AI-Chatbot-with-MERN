@@ -1,24 +1,26 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
+import AccessControl from './AccessControl';
 import { fetchItems } from '../api';
 
 const ItemList = () => {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = React.useState([]);
 
-    const getItems = useCallback(async () => {
-        const items = await fetchItems();
-        setItems(items);
+    React.useEffect(() => {
+        const getItems = async () => {
+            const items = await fetchItems();
+            setItems(items);
+        };
+        getItems();
     }, []);
 
-    useEffect(() => {
-        getItems();
-    }, [getItems]);
-
     return (
-        <ul>
-            {items.map(item => (
-                <li key={item.id}>{item.name}</li>
-            ))}
-        </ul>
+        <AccessControl allowedRoles={['admin', 'user']}>
+            <ul>
+                {items.map(item => (
+                    <li key={item.id}>{item.name}</li>
+                ))}
+            </ul>
+        </AccessControl>
     );
 };
 
