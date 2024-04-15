@@ -17,3 +17,8 @@ Resources:
               Service: elasticbeanstalk.amazonaws.com
             Action: s3:GetObject
             Resource: arn:aws:s3:::my-app-bucket/*
+          - Effect: Allow
+            Principal:
+              AWS: arn:aws:iam::123456789012:role/MyAppAdminRole
+            Action: s3:PutObject
+            Resource: arn:aws:s3:::my-app-bucket/admin/*
