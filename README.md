@@ -1,24 +1,19 @@
-## Authentication
+## Role Management
 
 ### Backend
 
-- JWT-based authentication is used.
-- Ensure `JWT_SECRET` is set in your environment variables.
+- Role-based access control is implemented.
+- Use `roleService` to manage user roles.
 
 ### Frontend
 
-- Users can log in and out using the provided components.
-- Tokens are stored in `localStorage`.
+- Access control is applied using `AccessControl` component.
+- Different UI elements are shown based on user role.
 
-## Login
+## Managing Roles
 
-1. **Navigate to login page**:
-   - URL: `/login`
+1. **Get user role**:
+   - Use `getUserRole(userId)` method.
 
-2. **Submit credentials**:
-   - Provides an authentication token.
-
-## Logout
-
-1. **Click logout button**:
-   - Clears token from `localStorage` and redirects to login page.
+2. **Set user role**:
+   - Use `setUserRole(userId, role)` method.
