@@ -1,19 +1,16 @@
-## Role Management
+# Project Documentation
 
-### Backend
+1. **Overview**:
+   - Brief description of the project and its features.
 
-- Role-based access control is implemented.
-- Use `roleService` to manage user roles.
+2. **Setup**:
+   - Instructions for setting up the project locally.
 
-### Frontend
+3. **Deployment**:
+   - Steps for deploying to AWS Elastic Beanstalk.
 
-- Access control is applied using `AccessControl` component.
-- Different UI elements are shown based on user role.
+4. **Testing**:
+   - Running unit and end-to-end tests.
 
-## Managing Roles
-
-1. **Get user role**:
-   - Use `getUserRole(userId)` method.
-
-2. **Set user role**:
-   - Use `setUserRole(userId, role)` method.
+5. **Usage**:
+   - How to use the application and its features.
